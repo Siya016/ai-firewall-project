@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../components/Dashboard.vue'
 import TrafficAnalysis from '../components/TrafficAnalysis.vue'
+import UrlAnalysis from '../components/UrlAnalysis.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,14 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: TrafficAnalysis
+    },
+    {
+      path: '/url-analysis',
+      name: 'url-analysis',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: UrlAnalysis
     }
   ]
 })

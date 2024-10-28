@@ -7,6 +7,7 @@
           <div id="headerButtonsContainer" >
               <Button type="button" icon="pi pi-filter-slash" label="Clear" @click="clearFilter()" class="left-button"  /> 
               <Button type="button" icon="pi pi-chart-bar" label="View data" @click="openAnalysisPage()"/> 
+              <Button type="button" icon="pi pi-chart-bar" label="Url analysis logs" @click="openUrlAnalysisPage()"/> 
               <div class="right-buttons">
                 <Dropdown v-model="selected_test_file" :options="tests_files" filter placeholder="Select One" class="p-column-filter" style="min-width: 12rem" :showClear="true"/>
                 <Button type="button" icon="pi pi-play" label="Start"  @click="startSimulation()" style="margin-left: 10px;"/>
@@ -149,6 +150,9 @@
       },
       openAnalysisPage(){
         this.$router.push('/traffic-analysis');
+      },
+      openUrlAnalysisPage(){
+        this.$router.push('/url-analysis');
       }
     },
     
