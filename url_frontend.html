@@ -41,11 +41,14 @@
 
   <script>
     function checkUrl() {
-      const url = document.getElementById("urlInput").value;
+      const urlInput = document.getElementById("urlInput").value.trim();
       const errorElement = document.getElementById("error");
 
       // Clear any previous error messages
       errorElement.textContent = "";
+
+      // Ensure the URL includes 'https://' at the start
+      let url = urlInput.startsWith("http") ? urlInput : "https://" + urlInput;
 
       // Fetch the user's public IP address
       fetch('https://api.ipify.org?format=json')
@@ -86,96 +89,3 @@
 
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <title>URL and IP Checker</title>-->
-<!--  <style>-->
-<!--    body {-->
-<!--      font-family: Arial, sans-serif;-->
-<!--    }-->
-<!--    #error {-->
-<!--      color: red;-->
-<!--      margin-top: 10px;-->
-<!--    }-->
-<!--    #urlForm {-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      width: 300px;-->
-<!--      margin: 100px auto;-->
-<!--    }-->
-<!--    input {-->
-<!--      padding: 8px;-->
-<!--      font-size: 16px;-->
-<!--    }-->
-<!--    button {-->
-<!--      padding: 10px;-->
-<!--      font-size: 16px;-->
-<!--      margin-top: 10px;-->
-<!--      cursor: pointer;-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--  <div id="urlForm">-->
-<!--    <label for="urlInput">Enter URL:</label>-->
-<!--    <input type="text" id="urlInput" placeholder="https://example.com">-->
-<!--    <button onclick="checkUrl()">Check URL</button>-->
-<!--    <p id="error"></p>-->
-<!--  </div>-->
-
-<!--  <script>-->
-<!--    function checkUrl() {-->
-<!--      const urlInput = document.getElementById("urlInput").value.trim();-->
-<!--      const errorElement = document.getElementById("error");-->
-
-<!--      // Clear any previous error messages-->
-<!--      errorElement.textContent = "";-->
-
-<!--      // Ensure the URL includes 'https://' at the start-->
-<!--      let url = urlInput.startsWith("http") ? urlInput : "https://" + urlInput;-->
-
-<!--      // Fetch the user's public IP address-->
-<!--      fetch('https://api.ipify.org?format=json')-->
-<!--        .then(response => response.json())-->
-<!--        .then(data => {-->
-<!--          const userIp = data.ip;-->
-
-<!--          // Send the URL and IP address to the backend-->
-<!--          fetch("http://127.0.0.1:5001/check-url", {-->
-<!--            method: "POST",-->
-<!--            headers: {-->
-<!--              "Content-Type": "application/json"-->
-<!--            },-->
-<!--            body: JSON.stringify({ url: url, ip: userIp })-->
-<!--          })-->
-<!--          .then(response => {-->
-<!--            if (response.status === 200) {-->
-<!--              // Redirect if the URL is allowed-->
-<!--              window.location.href = url;-->
-<!--            } else if (response.status === 404) {-->
-<!--              // Show an error if the URL is blocked-->
-<!--              errorElement.textContent = "The URL is not secure (HTTP). It is blocked.";-->
-<!--            } else {-->
-<!--              errorElement.textContent = "An unexpected error occurred.";-->
-<!--            }-->
-<!--          })-->
-<!--          .catch(error => {-->
-<!--            console.error("Error:", error);-->
-<!--            errorElement.textContent = "An error occurred while checking the URL.";-->
-<!--          });-->
-<!--        })-->
-<!--        .catch(error => {-->
-<!--          console.error("Error fetching IP address:", error);-->
-<!--          errorElement.textContent = "Unable to fetch IP address.";-->
-<!--        });-->
-<!--    }-->
-<!--  </script>-->
-
-<!--</body>-->
-<!--</html>-->
